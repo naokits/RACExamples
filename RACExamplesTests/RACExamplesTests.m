@@ -7,9 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-
+#import <TRVSMonitor/TRVSMonitor.h>
 
 @interface RACExamplesTests : XCTestCase
+@property (nonatomic, strong, getter=isPushed) NSNumber *pushd;
+@property (nonatomic, copy) NSString *name;
 
 @end
 
@@ -34,7 +36,43 @@
 
 //}
 
+- (void)testBasicObserv1
+{
+    __block BOOL waitingForBlock = YES;
 
+    [RACObserve(self, self.pushd) subscribeNext:^(NSNumber *x) {
+        NSLog(@"ページ移動");
+        waitingForBlock = NO;
+    }];
+
+    while(waitingForBlock) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
+
+    NSLog(@"終了");
+}
+
+- (void)testBasicObserv2
+{
+//    TRVSMonitor *monitor = [[TRVSMonitor alloc] initWithExpectedSignalCount:2];
+    
+    [[RACObserve(self, name)
+      filter:^(NSString *newName) {
+          return [newName hasPrefix:@"Gill"];
+      }]
+     subscribeNext:^(NSString *x) {
+         NSLog(@"%@", x);
+     }];
+    
+    self.name = @"hoge";
+    self.name = @"Gillinghum";
+//    [monitor signal];
+
+//    [monitor wait];
+    NSLog(@"終了");
+}
+
+/// シグナルの結合の例
 - (void)testCombineSignal
 {
     __block BOOL waitingForBlock = YES;

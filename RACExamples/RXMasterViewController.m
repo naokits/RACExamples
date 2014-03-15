@@ -7,7 +7,6 @@
 //
 
 #import "RXMasterViewController.h"
-
 #import "RXDetailViewController.h"
 
 @interface RXMasterViewController () {
@@ -62,6 +61,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+/*
+    UITableViewCell *cell;
+
+    NSString *cellIDString;
+    if (indexPath.row == 0) {
+        cellIDString = @"Cell1";
+    } else if (indexPath.row == 1) {
+        cellIDString = @"Cell2";
+    } else if (indexPath.row == 2) {
+        cellIDString = @"Cell3";
+    }
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIDString forIndexPath:indexPath];
+*/
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
     NSDate *object = _objects[indexPath.row];
@@ -85,24 +98,18 @@
     }
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSLog(@"セグエ:%@", [segue identifier]);
+
+//    if ([[segue identifier] isEqualToString:@"basicIdentifier"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        NSDate *object = _objects[indexPath.row];
+//        [[segue destinationViewController] setDetailItem:object];
+//    }
+
+    
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSDate *object = _objects[indexPath.row];
