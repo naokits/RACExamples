@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
+
 @interface RACExamplesTests : XCTestCase
 
 @end
@@ -26,9 +27,43 @@
     [super tearDown];
 }
 
-- (void)testExample
+//- (void)testExample
+//{
+//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+//    XCTFail(@"%s Error:%@", __PRETTY_FUNCTION__, error);
+
+//}
+
+
+- (void)testCombineSignal
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    __block BOOL waitingForBlock = YES;
+
+    RACSignal *signal1 = @[@(1)].rac_sequence.signal;
+    RACSignal *signal2 = @[@(2)].rac_sequence.signal;
+    
+    [[RACSignal merge:@[signal1, signal2]]
+     subscribeCompleted:^{
+         NSLog(@"They are both done!");
+         XCTAssertTrue(YES, @"Should have been success!");
+     }];
+
+    [signal1 subscribeNext:^(id x) {
+        NSLog(@"signal1: %@", x);
+    }];
+    
+    [signal2 subscribeNext:^(id x) {
+        NSLog(@"signal2: %@", x);
+    }];
+    waitingForBlock = NO;
+
+
+    // Run the loop
+    while(waitingForBlock) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    }
 }
+
+
 
 @end
