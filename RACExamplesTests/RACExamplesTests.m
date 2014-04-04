@@ -195,10 +195,11 @@
 }
 
 //- (RACSignal*)loadInformationSignal {
-//    RACSignal* coupon = [RACSignal defer:^RACSignal* { return [self.restHelper getCoupon]; }];
-//    RACSignal* packet = [RACSignal defer:^RACSignal* { return [self.restHelper getPacket]; }];
+// deferでホットシグナルをコールドシグナルに変換
+//    RACSignal* signal1 = [RACSignal defer:^RACSignal* { return [self.restHelper getCoupon]; }];
+//    RACSignal* signal2 = [RACSignal defer:^RACSignal* { return [self.restHelper getPacket]; }];
 //         
-//    RACSignal* sig = [[coupon concat:packet] collect];
+//    RACSignal* sig = [[signal1 concat:signal2] collect];
 //    return self.restHelper.accessToken? sig : [[[self.restHelper authorize] catch:self.errorBlock] concat:sig];
 //}
 
