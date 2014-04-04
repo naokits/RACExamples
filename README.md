@@ -1,7 +1,7 @@
 RACExamples
 ===========
 
-Some examples code using ReactiveCocoa for me.
+Some examples code using ReactiveCocoa and information for me.
 
 ## Links
 
@@ -12,3 +12,8 @@ Some examples code using ReactiveCocoa for me.
 * [ReactiveCocoa Philosphy](http://reactivecocoa.io/philosophy.html)
 
 
+## 用語
+
+* フローベース
+* ホットシグナル
+* コールドシグナル
