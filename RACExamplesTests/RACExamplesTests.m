@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import <TRVSMonitor/TRVSMonitor.h>
+// #import <TRVSMonitor/TRVSMonitor.h>
 
 /**
 *   UIが必要でないテストは基本的にここで行う
@@ -15,14 +15,13 @@
 
 @interface RACExamplesTests : XCTestCase
 
-@property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, copy) NSString *username;
-//@property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *passwordConfirmation;
 @property (nonatomic, assign) BOOL isLoggedin;
 
-//@property (nonatomic, strong) NSArray *newNames;
+@property (nonatomic, strong) UITextField *nameField;
+
 @end
 
 @implementation RACExamplesTests
@@ -49,14 +48,11 @@
 
 
 /*
-    usernameプロパティを監視し、変更がある毎にコンソールに表示します。
+    usernameプロパティを監視し、変更がある毎にコンソールに表示する
  */
 - (void)testBasicObserv1
 {
     [RACObserve(self, username) subscribeNext:^(NSString *newName) {
-        if (!newName) {
-//            XCTFail(@"%s :%@", __PRETTY_FUNCTION__, newName);
-        }
         NSLog(@"変更された名前: %@", newName);
     }];
 
@@ -64,13 +60,11 @@
     self.username = @"name2";
     self.username = @"name3";
 
-    NSLog(@"終了");
+    NSLog(@"testBasicObserv1 終了");
 }
 
 - (void)testBasicObserv2
 {
-//    TRVSMonitor *monitor = [[TRVSMonitor alloc] initWithExpectedSignalCount:2];
-
     [[RACObserve(self, name)
             filter:^(NSString *newName) {
                 return [newName hasPrefix:@"Gill"];
@@ -81,9 +75,7 @@
 
     self.username = @"hoge";
     self.username = @"Gillinghum";
-//    [monitor signal];
-//    [monitor wait];
-    NSLog(@"終了");
+    NSLog(@"testBasicObserv2 終了");
 }
 
 
@@ -216,18 +208,15 @@
 
 /*
 
-Signalは状態の導出にも用いることができます。
-これまでのようにプロパティを監視し、その変化に応じて状態を示すための、プロパティを設定
-しなくとも、RACによってSignalや操作そのものが状態の特性を示すことが出来るのです。
+ Signalは状態の導出にも用いることができる
+ プロパティを監視し、その変化に応じて状態を示すためのプロパティを設定しなくとも、
+ RACによってSignalや操作そのものが状態の特性を示すことが出来る。
 
-次の例では、パスワード入力欄とパスワード確認用の入力欄の値が同じであれば、createEnableed
-をYESとする、一方向のバインディングを作成します。
+ 次の例では、パスワード入力欄とパスワード確認用の入力欄の値が同じであれば、createEnableed
+ をYESとする、一方向のバインディングを作成する。
 
-RAC()はバインディングをいい感じに見せるためのマクロです。
-
-**+combineLatest: reduce:** は、Signalの配列を受け取り、各Signalの最新の値を元に
-Blockを実行し、その実行結果に応じて、新たに戻り値を送信する **RACSignal** を作成します。
-
+ **+combineLatest: reduce:** は、Signalの配列を受け取り、各Signalの最新の値を元に
+ Blockを実行し、その実行結果に応じて、新たに戻り値を送信する **RACSignal** を作成する。
  */
 
 - (void)testBindState
@@ -243,8 +232,10 @@ Blockを実行し、その実行結果に応じて、新たに戻り値を送信
                                   return @([passwordConfirm isEqualToString:password]);
                               }];
 
+    // プロパティの値を変更
     self.password = @"hogehoge";
     self.passwordConfirmation = @"hogehoge";
+
     waitingForBlock = NO;
 
     while(waitingForBlock) {

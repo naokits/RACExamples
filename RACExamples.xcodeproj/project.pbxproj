@@ -59,6 +59,7 @@
 		120ED9B518D44267005F6809 /* RACExamplesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RACExamplesTests-Info.plist"; sourceTree = "<group>"; };
 		120ED9B718D44267005F6809 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		120ED9B918D44267005F6809 /* RACExamplesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RACExamplesTests.m; sourceTree = "<group>"; };
+		12122FB218EF2F4300560A49 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		5949AE6FE0F14147A34D989F /* libPods-RACExamplesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RACExamplesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC1C37840060402E91AE40DF /* Pods-RACExamplesTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RACExamplesTests.xcconfig"; path = "Pods/Pods-RACExamplesTests.xcconfig"; sourceTree = "<group>"; };
 		E927F13A565448E3B85C37CE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +94,7 @@
 		120ED97F18D44266005F6809 = {
 			isa = PBXGroup;
 			children = (
+				12122FB218EF2F4300560A49 /* README.md */,
 				120ED99118D44266005F6809 /* RACExamples */,
 				120ED9B318D44267005F6809 /* RACExamplesTests */,
 				120ED98A18D44266005F6809 /* Frameworks */,
@@ -237,8 +239,6 @@
 			mainGroup = 120ED97F18D44266005F6809;
 			productRefGroup = 120ED98918D44266005F6809 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-			);
 			projectRoot = "";
 			targets = (
 				120ED98718D44266005F6809 /* RACExamples */,
@@ -548,6 +548,7 @@
 				120ED9BF18D44267005F6809 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		120ED9C018D44267005F6809 /* Build configuration list for PBXNativeTarget "RACExamplesTests" */ = {
 			isa = XCConfigurationList;
@@ -556,6 +557,7 @@
 				120ED9C218D44267005F6809 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
